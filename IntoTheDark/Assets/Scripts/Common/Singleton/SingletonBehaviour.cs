@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
@@ -10,7 +11,12 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
+            {
+                instance = GameObject.FindAnyObjectByType<T>();
+            }
+
+            if (instance == null)
             {
                 GameObject go = new GameObject();
                 instance = go.AddComponent<T>();
@@ -19,7 +25,7 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    public void Awake()
+    public virtual void Awake()
     {
         Init();
     }
