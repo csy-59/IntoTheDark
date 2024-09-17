@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     public Vector3 MoveDirection { get; private set; }
+
+    private Vector2 inputDir;
+    public Vector2 InputDirection
+    {
+        get => inputDir;
+        private set
+        {
+            inputDir = value;
+            OnInputDirectionChanged?.Invoke(inputDir);
+        }
+    }
+    public Action<Vector2> OnInputDirectionChanged { get; set; }
+
     public bool IsGround { get; private set; }
 
     private void OnEnable()
@@ -79,6 +93,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext _context)
     {
-        MoveDirection = new Vector3(_context.ReadValue<Vector2>().x, 0f, _context.ReadValue<Vector2>().y);
+        InputDirection = _context.ReadValue<Vector2>();
+        MoveDirection = new Vector3(InputDirection.x, 0f, InputDirection.y);
     }
 }
