@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float floatingHeight;
     [SerializeField] private LayerMask groundLayer;
 
-    private Vector3 moveDirection;
+    public Vector3 MoveDirection { get; private set; }
     public bool IsGround { get; private set; }
 
     private void OnEnable()
@@ -40,10 +40,16 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        if (moveDirection != Vector3.zero)
+        // 대시 중이면 이동 연산 안함
+        if (status.IsDashing == true)
+        {
+            return;
+        }
+
+        if (MoveDirection != Vector3.zero)
         {
             Vector3 locVel = transform.InverseTransformDirection(rigid.velocity);
-            Vector3 newVel = moveDirection.normalized * status.Speed;
+            Vector3 newVel = MoveDirection.normalized * status.Speed;
             locVel.x = newVel.x;
             locVel.z = newVel.z;
             rigid.velocity = transform.TransformDirection(locVel);
@@ -73,6 +79,6 @@ public class PlayerMove : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext _context)
     {
-        moveDirection = new Vector3(_context.ReadValue<Vector2>().x, 0f, _context.ReadValue<Vector2>().y);
+        MoveDirection = new Vector3(_context.ReadValue<Vector2>().x, 0f, _context.ReadValue<Vector2>().y);
     }
 }

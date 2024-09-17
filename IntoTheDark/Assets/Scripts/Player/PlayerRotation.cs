@@ -21,7 +21,10 @@ public class PlayerRotation : MonoBehaviour
 
     public void FixedUpdate()
     {
-        UpdateRotate(UnityEngine.Input.GetAxis("Mouse X"), UnityEngine.Input.GetAxis("Mouse Y"));
+        if ((status.IsDashing) == false)
+        {
+            UpdateRotate(UnityEngine.Input.GetAxis("Mouse X"), UnityEngine.Input.GetAxis("Mouse Y"));
+        }
     }
 
     private void UpdateRotate(float mouseX, float mouseY)

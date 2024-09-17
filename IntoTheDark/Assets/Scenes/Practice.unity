@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 997698271}
   - component: {fileID: 997698275}
   - component: {fileID: 997698274}
+  - component: {fileID: 997698276}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -389,7 +390,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heath: 0
   speed: 8
-  dashSpeed: 0
+  normalSpeed: 8
+  dashSpeed: 100
+  dashTime: 0.5
   jumpForce: 20
   fallingSpeed: 3
   rotateSpeed: 50
@@ -469,6 +472,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: {fileID: 997698271}
   rigid: {fileID: 997698272}
+  move: {fileID: 997698273}
+--- !u!114 &997698276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997698269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc8b9de92a90a94da8853c1d66811fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 997698272}
+  status: {fileID: 997698271}
   move: {fileID: 997698273}
 --- !u!1 &1724410114
 GameObject:
